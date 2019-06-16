@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<restile id="1" path="Prefab/Entity/tile_1"/>
+	<restile id="2" path="Prefab/Entity/tile_2"/>
+	<restile id="3" path="Prefab/Entity/tile_3"/>
+	<restile id="4" path="Prefab/Entity/tile_4"/>
+</root>

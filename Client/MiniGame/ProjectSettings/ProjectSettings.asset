@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 15
-  productGUID: f9677e82ce11b974fb07064bcd644844
+  productGUID: 061a180d98c591f46886e5f227aac541
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -520,7 +520,8 @@ PlayerSettings:
   webGLCompressionFormat: 1
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    1: UNITY_DISABLE_AUTOMATIC_SYSTEM_BOOTSTRAP
   platformArchitecture: {}
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}
@@ -611,9 +612,9 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 55ed4c65-d1e9-477e-bf75-46eed0c18336
+  cloudProjectId: 60142a17-ba77-43a5-a5a4-abe577c52c8f
   framebufferDepthMemorylessMode: 0
-  projectName: MiniGame
+  projectName: MiniGame (2)
   organizationId: 0freefly0
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0

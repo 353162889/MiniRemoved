@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<resui name="LobbyView" prefab="Prefab/UI/LobbyView"/>
+	<resui name="BattleView" prefab="Prefab/UI/BattleView"/>
+	<resui name="ResultView" prefab="Prefab/UI/ResultView"/>
+</root>
