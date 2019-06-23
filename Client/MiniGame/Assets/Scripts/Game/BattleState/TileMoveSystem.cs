@@ -19,15 +19,16 @@ public class TileMoveSystem : ComponentSystem
         });
     }
 
-    public void MoveTile(Entity entity, Vector3 startPos, Vector3 endPos, float duration)
+    public void MoveTile(Entity entity, Vector3 startPos, Vector3 endPos, float duration, float delay = 0f)
     {
         var tileMoveComponent = World.GetComponent<TileMoveComponent>(entity);
         if (tileMoveComponent == null) return;
         tileMoveComponent.tweener?.Kill(true);
         var prefabComponent = World.GetComponent<PrefabComponent>(entity);
         prefabComponent.trans.position = startPos;
-        tileMoveComponent.tweener = prefabComponent.trans.DOMove(endPos, duration);
-
+        var t = prefabComponent.trans.DOMove(endPos, duration);
+        if (delay > 0) t.SetDelay(delay);
+        tileMoveComponent.tweener = t;
     }
 
     public bool IsMoving(Entity entity)

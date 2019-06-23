@@ -97,25 +97,34 @@ public class TileOperateSystem : ComponentSystem
 
     private void SetSelectPos(TileOpeareteComponent tileOperateComponent, Vector2Int pos, bool effectActive )
     {
-        tileOperateComponent.selectPos = pos;
-        var prefabComponent = World.GetComponent<PrefabComponent>(tileOperateComponent.effectEntity);
-        prefabComponent.go.SetActive(effectActive);
         var tileMapComponent = World.GetSingletonComponent<TileMapComponent>();
-        prefabComponent.trans.position =
-            tileSprawnSystem.GetTileWorldPosition(tileMapComponent, tileOperateComponent.selectPos);
+        var oldPos = tileOperateComponent.selectPos;
+        if (oldPos.x >= 0 && oldPos.y >= 0)
+        {
+            var oldEntity = tileMapComponent.entities[oldPos.x, oldPos.y];
+            var prefabComponent = World.GetComponent<PrefabComponent>(oldEntity);
+            ((TileView)prefabComponent.view).ShowEffect(false);
+        }
+        tileOperateComponent.selectPos = pos;
+        if (pos.x >= 0 && pos.y >= 0)
+        {
+            var newEntity = tileMapComponent.entities[pos.x, pos.y];
+            var prefabComponent = World.GetComponent<PrefabComponent>(newEntity);
+            ((TileView)prefabComponent.view).ShowEffect(true);
+        }
     }
 
-    public Entity CreateEffectEntity(string name)
-    {
-        var effectEntity = World.CreateEntity();
-        var prefabComponent = World.AddComponentOnce<PrefabComponent>(effectEntity);
-        prefabComponent.go = prefabComponent.gameObject;
-        prefabComponent.trans = prefabComponent.transform;
-        var view = new EffectView();
-        view.Init(name, false, prefabComponent.transform);
-        prefabComponent.view = view;
-        return effectEntity;
-    }
+//    public Entity CreateEffectEntity(string name)
+//    {
+//        var effectEntity = World.CreateEntity();
+//        var prefabComponent = World.AddComponentOnce<PrefabComponent>(effectEntity);
+//        prefabComponent.go = prefabComponent.gameObject;
+//        prefabComponent.trans = prefabComponent.transform;
+//        var view = new EffectView();
+//        view.Init(name, false, prefabComponent.transform);
+//        prefabComponent.view = view;
+//        return effectEntity;
+//    }
 
     
 

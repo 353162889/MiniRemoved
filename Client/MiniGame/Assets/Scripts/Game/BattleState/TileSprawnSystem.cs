@@ -155,6 +155,7 @@ public class TileSprawnSystem : ComponentSystem
         prefabComponent.view = tileView;
 
         var tileMoveComponent = World.AddComponentOnce<TileMoveComponent>(entity);
+        var tileDestroyComponent = World.AddComponentOnce<TileDestroyComponent>(entity);
 
         return entity;
     }
@@ -174,11 +175,11 @@ public class TileSprawnSystem : ComponentSystem
         return new Vector2Int(row, column);
     }
 
-    public void RemoveTile(TileMapComponent tileMapComponent, Vector2Int pos)
+    public void RemoveTile(TileMapComponent tileMapComponent, Vector2Int pos, float time = 0)
     {
         var entities = tileMapComponent.entities;
         var entity = entities[pos.x, pos.y];
-        World.DestroyEntity(entity);
+        World.GetOrCreateSystem<TileDestroySystem>().DestroyEntity(entity, time);
         entities[pos.x, pos.y] = Entity.Null;
     }
 
@@ -190,12 +191,12 @@ public class TileSprawnSystem : ComponentSystem
         tileMapComponent.entities[bPos.x, bPos.y] = temp;
     }
 
-    public void RemoveTiles(TileMapComponent tileMapComponent, HashSet<Vector2Int> lstClear)
+    public void RemoveTiles(TileMapComponent tileMapComponent, HashSet<Vector2Int> lstClear, float time = 0.5f)
     {
         var tileSprawnComponent = World.GetSingletonComponent<TileSprawnComponent>();
         foreach (Vector2Int pos in lstClear)
         {
-            RemoveTile(tileMapComponent, pos);
+            RemoveTile(tileMapComponent, pos, time);
         }
 
         int maxRow = tileMapComponent.rowCount;
@@ -258,7 +259,7 @@ public class TileSprawnSystem : ComponentSystem
         {
             var entity = tileMapComponent.entities[pos.x, pos.y];
             var prefabComponent = World.GetComponent<PrefabComponent>(entity);
-            tileMoveSystem.MoveTile(entity, prefabComponent.trans.position, GetTileWorldPosition(tileMapComponent, pos), tileSprawnComponent.downDuration);
+            tileMoveSystem.MoveTile(entity, prefabComponent.trans.position, GetTileWorldPosition(tileMapComponent, pos), tileSprawnComponent.downDuration, 0.3f);
             tileSprawnComponent.lstDownPos.Add(pos);
         }
 

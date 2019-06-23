@@ -26,6 +26,7 @@ namespace Game
             tileSprawnSystem = world.GetOrCreateSystem<TileSprawnSystem>();
             var renderSystem = world.GetOrCreateSystem<RenderSystem>();
             var tileCheckSystem = world.GetOrCreateSystem<TileCheckSystem>();
+            var tileDestroySystem = world.GetOrCreateSystem<TileDestroySystem>();
 
             //初始化各个单例系统
             //出事化地图数据
@@ -43,9 +44,6 @@ namespace Game
 
             var tileOpearteComponent = world.AddSingletonComponent<TileOpeareteComponent>();
             tileOpearteComponent.selectPos = new Vector2Int(-1, -1);
-            var effectEntity = world.CreateEntity(ComponentType.ReadOnly<PrefabComponent>());
-            tileOpearteComponent.effectEntity = tileOperateSystem.CreateEffectEntity("Effect_1");
-            renderSystem.SetActive(tileOpearteComponent.effectEntity, false);
 
             var tileSprawnComponent = world.AddSingletonComponent<TileSprawnComponent>();
             tileSprawnSystem.InitTiles();

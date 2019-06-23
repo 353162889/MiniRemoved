@@ -7,7 +7,6 @@ using Unity.Entities;
 public class TileOpeareteComponent : DataComponent
 {
     public Vector2Int selectPos;
-    public Entity effectEntity = Entity.Null;
     public bool isSwapOperating = false;
     public Vector2Int swapPosA;
     public Vector2Int swapPosB;
